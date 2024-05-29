@@ -1,6 +1,5 @@
 package pages.clients;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 public class AddClient {
@@ -43,6 +42,7 @@ public class AddClient {
 
     public AddClient(WebDriver driver)
     {
+        this.driver = driver;
         PageFactory.initElements(driver,this);
     }
 
@@ -100,6 +100,51 @@ public class AddClient {
 
     public void setTaxesCode(String taxCode) {
         taxesCode.sendKeys(taxCode);
+    }
+
+    @FindBy (id = "select2-client_language-container")
+    WebElement languageContainer;
+    @FindBy (xpath = "//input[@role='searchbox']")
+    WebElement searchBox;
+    public void setLanguage(String language)
+    {
+        languageContainer.click();
+        searchBox.sendKeys(language);
+        searchBox.sendKeys(Keys.ENTER);
+    }
+
+    @FindBy (id="select2-client_country-container")
+    WebElement countryContainer;
+
+    WebDriver driver;
+    public void setCountry(String country)
+    {
+        countryContainer.click();
+        searchBox.sendKeys(country);
+        driver.findElement(By.xpath("//li[normalize-space()='"+country+"']")).click();
+    }
+
+    @FindBy (id="select2-client_gender-container")
+    WebElement genderContainer;
+    public void setGender(String gender)
+    {
+        genderContainer.click();
+        driver.findElement(By.xpath("//li[normalize-space()='"+gender+"']")).click();
+    }
+
+    @FindBy(xpath="//input[@name='client_birthdate']")
+    WebElement birthdate;
+
+    public void setBirthdate(String bDate)
+    {
+       /* birthdate.sendKeys(bDate);
+        birthdate.sendKeys(Keys.ENTER);*/
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+       // js.executeScript("window.scroll(0,600)");
+        js.executeScript("arguments[0].setAttribute('value','"+bDate+"')",birthdate);
+
     }
 
     public void clickSave() {

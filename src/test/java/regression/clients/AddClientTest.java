@@ -32,7 +32,7 @@ public class AddClientTest {
         menu.clickAddClient();
 
         AddClient addClient = new AddClient(driver);
-        addClient.setClientName("John");
+       /* addClient.setClientName("John");
         addClient.setClientSurname("Doe");
         addClient.setStreetAddress1("123 Main St");
         addClient.setStreetAddress2("Apt 4B");
@@ -48,6 +48,11 @@ public class AddClientTest {
         addClient.setTaxesCode("TAX123456");
 
         // Click the save button
-        addClient.clickSave();
+        addClient.clickSave();*/
+
+        addClient.setLanguage("Thai");
+        addClient.setCountry("Nigeria");
+        addClient.setGender("Female");
+        addClient.setBirthdate("28/09/1985");
     }
 }
