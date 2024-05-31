@@ -142,7 +142,7 @@ public class AddClient {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
-       // js.executeScript("window.scroll(0,600)");
+        js.executeScript("window.scroll(0,600)");
         js.executeScript("arguments[0].setAttribute('value','"+bDate+"')",birthdate);
 
     }
