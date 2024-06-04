@@ -13,24 +13,26 @@ import pages.clients.AddClient;
 
 import java.io.IOException;
 import java.sql.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 
+import static util.ConfigReader.*;
+import static util.Conversion.*;
 import static util.ForDataProvider.getMyData;
 
 public class AddClientTest {
     WebDriver driver;
     @BeforeClass
-    public void doLogin()
-    {
+    public void doLogin() throws IOException {
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("http://localhost/ip");
+        driver.get(getUrl());
 
         Login login = new Login(driver);
 
-        login.setTxtUsername("amolujagare@gmail.com");
-        login.setTxtPassword("admin123");
+        login.setTxtUsername(getUsername());
+        login.setTxtPassword(getPassword());
         login.clickLogin();
     }
 
@@ -40,7 +42,7 @@ public class AddClientTest {
             String streetAddress2, String city, String state, String zipCode, String country,
             String gender, String birthdate, String phoneNumber, String faxNumber, String mobileNumber,
             String emailAddress, String webAddress, String vatID, String taxesCode
-            ) throws ClassNotFoundException, SQLException {
+            ) throws ClassNotFoundException, SQLException, ParseException {
 
         Menu menu = new Menu(driver);
         menu.clickAddClient();
@@ -118,9 +120,19 @@ public class AddClientTest {
             actual.add(rs.getString("client_city"));
             actual.add(rs.getString("client_state"));
             actual.add(rs.getString("client_zip"));
-            actual.add(rs.getString("client_country"));
-            actual.add(rs.getString("client_gender"));
-            actual.add(rs.getString("client_birthdate"));
+
+
+            String shortCountry = rs.getString("client_country");
+            String countryFullForm = convertCountry(shortCountry);
+            actual.add(countryFullForm);
+
+
+
+            actual.add(getGender(rs.getString("client_gender")));
+
+
+            actual.add(convertDate(rs.getString("client_birthdate")));
+
             actual.add(rs.getString("client_phone"));
             actual.add(rs.getString("client_fax"));
             actual.add(rs.getString("client_mobile"));

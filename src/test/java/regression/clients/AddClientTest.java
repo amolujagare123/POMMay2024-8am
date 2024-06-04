@@ -14,22 +14,22 @@ import pages.clients.AddClient;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import static util.ConfigReader.*;
 import static util.ForDataProvider.getMyData;
 
 public class AddClientTest {
     WebDriver driver;
     @BeforeClass
-    public void doLogin()
-    {
+    public void doLogin() throws IOException {
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("http://localhost/ip");
+        driver.get(getUrl());
 
         Login login = new Login(driver);
 
-        login.setTxtUsername("amolujagare@gmail.com");
-        login.setTxtPassword("admin123");
+        login.setTxtUsername(getUsername());
+        login.setTxtPassword(getPassword());
         login.clickLogin();
     }
 
