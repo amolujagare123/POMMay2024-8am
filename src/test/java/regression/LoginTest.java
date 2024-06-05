@@ -4,18 +4,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 import pages.Login;
+import util.OpenUrl;
 
 import java.io.IOException;
 
 import static util.ConfigReader.*;
 
-public class LoginTest {
+public class LoginTest extends OpenUrl
+{
 
     @Test
     public void loginTest() throws IOException {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(getUrl());
 
         Login login = new Login(driver);
 

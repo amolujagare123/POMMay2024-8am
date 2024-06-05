@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import pages.Login;
 import pages.Menu;
 import pages.clients.AddClient;
+import util.DoLogin;
 
 import java.io.IOException;
 import java.sql.*;
@@ -20,21 +21,7 @@ import static util.ConfigReader.*;
 import static util.Conversion.*;
 import static util.ForDataProvider.getMyData;
 
-public class AddClientTest {
-    WebDriver driver;
-    @BeforeClass
-    public void doLogin() throws IOException {
-
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(getUrl());
-
-        Login login = new Login(driver);
-
-        login.setTxtUsername(getUsername());
-        login.setTxtPassword(getPassword());
-        login.clickLogin();
-    }
+public class AddClientTest extends DoLogin {
 
     @Test (dataProvider = "getData")
     public void addClientTest(

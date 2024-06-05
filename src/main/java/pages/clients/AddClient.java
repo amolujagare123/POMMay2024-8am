@@ -34,7 +34,10 @@ public class AddClient {
     @FindBy (xpath = "//button[@id='btn-submit']")
     WebElement save;
 
+    //input[@id='client_active']
 
+    @FindBy (xpath = "//input[@id='client_active']")
+    public WebElement active;
   /*  public void setTextBox(WebElement element,String value)
     {
         element.sendKeys(value);
@@ -101,6 +104,8 @@ public class AddClient {
     public void setTaxesCode(String taxCode) {
         taxesCode.sendKeys(taxCode);
     }
+
+
 
     @FindBy (id = "select2-client_language-container")
     WebElement languageContainer;
